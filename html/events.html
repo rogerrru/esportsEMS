@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <title>VALORANT//LEADERBOARDS</title>
+    <link rel = "icon" href = "../assets/media/logo.png" type = "image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/v4-shims.css" />
+    <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+<!-- NAVBAR -->
+<nav class="navbar">
+</nav>
+<!-- END OF NAVBAR -->
+
+<!-- HEADER -->
+<header>
+    <div class="video-container">
+        <video autoplay muted loop class="myVideo">
+            <source src="../assets/media/agent-background-generic.mp4" type="video/mp4" />
+        </video>
+        <div class="valo-img-container">
+            <img style="text-align: center;" src="../assets/media/agents-group-31d7ce5a3637e45d8b25d2fd03159e6c.png" alt="valo-img" class="valo-img" />
+        </div>
+        <div class="text-overlay">
+            <h1>
+                LATEST EVENTS
+            </h1>
+        </div>
+    </div>
+    <div class ="top-players">
+        <div class="search-bar">
+            <p>SEARCH EVENTS</p>
+            <div class="search-container">
+                <input type="text" id="nameFilter" placeholder="Event Name">
+                <button type="submit" id="searchButton">
+                    <div class="button">
+                        <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="m24 21-5.6-5.6A10.058 10.058 0 0 0 20 10a10 10 0 1 0-10 10 10.058 10.058 0 0 0 5.4-1.6L21 24l3-3zM4 10a6 6 0 1 1 6 6 5.89 5.89 0 0 1-6-6z" fill="#0F1923" stroke="none" stroke-width="0"></path>
+                        </svg>
+                    </div>
+                </button>
+            </div>
+        </div>
+        <div class="sectionWrapperEvent">
+            <div class="event">
+                <label for="eventSelect"></label>
+                <select id="eventSelect">
+                </select>
+            </div>
+            <div class="status">
+                <label for="statusSelect"></label>
+                <select id="statusSelect">
+                    <option value="upcoming">ONGOING</option>
+                    <option value="results">FINISHED</option>
+                </select>
+            </div>
+        </div>
+        <section class ="Event ">
+            <!--            FORMAT FOR THE EVENT       -->
+            <li class="event-info">
+                <div class = "event-tourn-rank-container">
+                    <h3>Tournament</h3>
+                </div>
+                <div class="event-round-rating-container">
+                    <p class="player-points">Round</p>
+                </div>
+                <div  class="team-container-wins-container">
+                    <p>
+                        <span class="player-wins">Teams</span>
+                    </p>
+                </div>
+                <div  class="score-container-container">
+                    <p>
+                        <span class="player-wins">Score</span>
+                    </p>
+                </div>
+            </li>
+
+
+            <div class="rankingsContainer">
+                <!-- Rankings will be displayed here -->
+
+            </div>
+        </section>
+        <div class="pagination">
+            <button id="prevPage">Previous</button>
+            <button id="nextPage">Next</button>
+        </div>
+        <!-- Container to display the filtered rankings -->
+    </div>
+
+</header>
+<!-- END OF HEADER -->
+<!-- FOOTER -->
+<footer>
+    <p><i class="fas fa-copyright"></i> 2023 TEAM DYNAMITE</p>
+    <p class="p2">All images, videos, and contents are property of RIOT GAMES</p>
+</footer>
+<!-- END OF FOOTER -->
+
+<!-- Scroll Reveal -->
+<script src="https://unpkg.com/scrollreveal"></script>
+
+<!-- My JS -->
+<script src="../assets/js/navbar.js"></script>
+<script src="../assets/js/events.js"></script>
+<script src="../assets/js/index.js"></script>
+</body>
+</html>

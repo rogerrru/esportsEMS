@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <title>VALORANT//LEADERBOARDS</title>
+    <link rel = "icon" href = "../assets/media/logo.png" type = "image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/v4-shims.css" />
+    <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+<!-- NAVBAR -->
+<nav class="navbar">
+</nav>
+<!-- END OF NAVBAR -->
+
+<!-- HEADER -->
+<header>
+    <div class="video-container">
+        <video autoplay muted loop class="myVideo">
+            <source src="../assets/media/agent-background-generic.mp4" type="video/mp4" />
+        </video>
+        <div class="valo-img-container">
+            <img style="text-align: center;" src="../assets/media/agents-group-31d7ce5a3637e45d8b25d2fd03159e6c.png" alt="valo-img" class="valo-img" />
+        </div>
+        <div class="text-overlay">
+            <h1>LEADER BOARDS</h1>>
+        </div>
+    </div>
+    <div class ="top-players">
+        <div class="search-bar">
+            <p>SEARCH LEADERBOARDS</p>
+            <div class="search-container">
+                <input type="text" id="nameFilter" placeholder="Team Name">
+                <button type="submit" id="searchButton">
+                    <div class="button">
+                        <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="m24 21-5.6-5.6A10.058 10.058 0 0 0 20 10a10 10 0 1 0-10 10 10.058 10.058 0 0 0 5.4-1.6L21 24l3-3zM4 10a6 6 0 1 1 6 6 5.89 5.89 0 0 1-6-6z" fill="#0F1923" stroke="none" stroke-width="0"></path>
+                        </svg>
+                    </div>
+                </button>
+            </div>
+        </div>
+        <div class="sectionWrapperTeam">
+            <button class = "regionTeam" value="na">NA
+            </button>
+            <button class = "regionTeam" value="eu">EU
+            </button>
+            <button class = "regionTeam" value="ap">AP
+            </button>
+            <button class = "regionTeam" value="la">LA</button>
+            <button class = "regionTeam" value="la-s">LA-S</button>
+            <button class = "regionTeam" value="la-n">LA-N</button>
+            <button class = "regionTeam" value="oce">OC</button>
+            <button class = "regionTeam" value="kr">KR</button>
+            <button class = "regionTeam" value="mn">MN</button>
+            <button class = "regionTeam" value="br">BR</button>
+            <button class = "regionTeam" value="cn">CN</button>
+        </div>
+
+
+        <section class ="Team ">
+            <!--            FORMAT FOR THE TEAM       -->
+            <li class="team-info">
+                <div class = "team-info-rank-container">
+                    <h3>Rank</h3>
+                </div>
+                <div>
+                </div>
+                <div class="team-info-name-container">
+                    <p class="team-name">Team Name</p>
+                </div>
+                <div  class="team-info-country-container">
+                    <p>
+                        <span class="team-wins">Country</span>
+                    </p>
+                </div>
+                <div  class="team-info-earnings-container">
+                    <p>
+                        <span class="team-earnings">Earnings</span>
+                    </p>
+                </div>
+                <div  class="team-info-record-container">
+                    <p>
+                        <span class="team-record">Record</span>
+                    </p>
+                </div>
+            </li>
+
+
+            <div class="rankingsContainer">
+                <!-- Rankings will be displayed here -->
+                <div class = "load-more-container"></div>
+            </div>
+        </section>
+        <div class="pagination">
+            <button id="prevPage">Previous</button>
+            <button id="nextPage">Next</button>
+        </div>
+        <!-- Container to display the filtered rankings -->
+    </div>
+
+</header>
+<!-- END OF HEADER -->
+<!-- FOOTER -->
+<footer>
+    <p><i class="fas fa-copyright"></i> 2023 TEAM DYNAMITE</p>
+    <p class="p2">All images, videos, and contents are property of RIOT GAMES</p>
+</footer>
+<!-- END OF FOOTER -->
+
+<!-- Scroll Reveal -->
+<script src="https://unpkg.com/scrollreveal"></script>
+
+<!-- My JS -->
+<script src="../assets/js/navbar.js"></script>
+<script src="../assets/js/leaderboardsTeams.js"></script>
+<script src="../assets/js/index.js"></script>
+</body>
+</html>
