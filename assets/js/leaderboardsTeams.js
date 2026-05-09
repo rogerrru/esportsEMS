@@ -1,131 +1,92 @@
-// Declare data, startIndex, and endIndex variables in a wider scope
-let data = []; // Initialize as an empty array
+let data = [];
 let startIndex = 0;
-let endIndex = 0;
+let endIndex   = 0;
 
-// FUNCTIONS
 document.addEventListener('DOMContentLoaded', () => {
-    const nameFilter = document.getElementById('nameFilter');
-    const regionSelect = document.querySelectorAll(".regionTeam");
-    const searchButton = document.getElementById('searchButton'); // New Search Button
-    const rankingsContainer = document.querySelector('.rankingsContainer');
-    let currentPage = 1;
+  const nameFilter   = document.getElementById('nameFilter');
+  const regionBtns   = document.querySelectorAll('.regionTeam');
+  const searchButton = document.getElementById('searchButton');
+  const rankingsContainer = document.querySelector('.rankingsContainer');
+  let currentPage = 1;
 
-    function fetchTeams(region, name, page) {
-        // Build the URL with the selected region
-        const proxyServerUrl = `http://localhost/proxy/proxy.php?url=https://vlrggapi.vercel.app/rankings/${region}`;
-        console.log(proxyServerUrl);
+  function fetchTeams(region, name, page) {
+    const apiUrl = `${CONFIG.API_BASE_URL}/api/rankings/${region}`;
+    rankingsContainer.innerHTML = '';
 
-        // Fetch data from the API using the URL
-        rankingsContainer.innerHTML = '';
-        fetch(proxyServerUrl)
-            .then((response) => response.json())
-            .then((fetchedData) => {
-                // Filter the data based on rank and name
-                data = fetchedData.data; // Assign fetchedData to the global data variable
-                console.log(data);
+    fetch(apiUrl)
+      .then(r => r.json())
+      .then(fetchedData => {
+        data = fetchedData.data;
 
-                // Filter the data based on rank and name
-                let filteredData = data.filter((team) => {
-                    const teamName = team.team.toLowerCase();
-                    const filterName = name.toLowerCase();
-                    return teamName.includes(filterName);
-                });
+        const filterName   = name.toLowerCase();
+        const filteredData = data.filter(team =>
+          team.team.toLowerCase().includes(filterName)
+        );
 
-                // Calculate startIndex and endIndex based on the filtered data
-                const resultsPerPage = 10;
-                startIndex = (page - 1) * resultsPerPage;
-                endIndex = Math.min(startIndex + resultsPerPage, filteredData.length);
+        const resultsPerPage = 10;
+        startIndex = (page - 1) * resultsPerPage;
+        endIndex   = Math.min(startIndex + resultsPerPage, filteredData.length);
 
-                // Create and append elements to display the filtered leaderboard data for the current page
-                for (let i = startIndex; i < endIndex; i++) {
-                    const team = filteredData[i];
-                    const teamElement = document.createElement('div');
-                    teamElement.classList.add('team');
-                    if (team.rank === "1") {
-                        teamElement.classList.add('first-place'); // Add a class for styling
-                    }
-                    teamElement.innerHTML = `
-                        <div class="team-rank-container">
-                            <h3 class="team-rank">${team.rank}</h3>
-                        </div>
-                        <div class="team-logo-container">
-                            <img src="${team.logo}" alt="Team Logo" class="team-logo">
-                        </div>
-                        <div class="team-name-container">
-                            <h2 class="team-name">${team.team}</h2>
-                        </div>
-                        <div class="team-country-container">
-                            <p>
-                                <span class="team-country">${team.country}</span>
-                            </p>
-                        </div>
-                         <div class="team-earnings-container">
-                            <p>
-                                <span class="team-earnings">${team.earnings}</span>
-                            </p>
-                        </div>
-                        <div class="team-record-container">
-                            <p>
-                                <span class="team-record">${team.record}</span>
-                            </p>
-                        </div>
-                        `;
-                    rankingsContainer.appendChild(teamElement);
-                }
-
-                updatePage();
-            })
-            .catch((error) => {
-                console.error('Fetch error:', error);
-            });
-    }
-
-    regionSelect.forEach(button => {
-        button.addEventListener('click', function () {
-            const regionValue = this.getAttribute('value');
-            fetchTeams(regionValue, nameFilter.value, currentPage);
-
-            // Remove the "selected" class from all buttons
-            regionSelect.forEach(btn => btn.classList.remove('selected'));
-
-            // Add the "selected" class to the clicked button
-            this.classList.add('selected');
-        });
-    });
-
-    function updatePage() {
-        // Your updatePage function remains the same
-    }
-
-// Add an event listener to the Previous Page button
-    document.getElementById('prevPage').addEventListener('click', () => {
-        if (currentPage > 1) {
-            currentPage--;
-            const selectedRegion = document.querySelector('.regionTeam.selected').getAttribute('value');
-            const selectedName = nameFilter.value;
-            fetchTeams(selectedRegion, selectedName, currentPage);
+        for (let i = startIndex; i < endIndex; i++) {
+          const team = filteredData[i];
+          const el   = document.createElement('div');
+          el.classList.add('team');
+          if (team.rank === '1') el.classList.add('first-place');
+          el.innerHTML = `
+            <div class="team-rank-container"><h3 class="team-rank">${team.rank}</h3></div>
+            <div class="team-logo-container">
+              <img src="${team.logo}" alt="Team Logo" class="team-logo" loading="lazy">
+            </div>
+            <div class="team-name-container"><h2 class="team-name">${team.team}</h2></div>
+            <div class="team-country-container"><p><span class="team-country">${team.country}</span></p></div>
+            <div class="team-earnings-container"><p><span class="team-earnings">${team.earnings}</span></p></div>
+            <div class="team-record-container"><p><span class="team-record">${team.record}</span></p></div>`;
+          rankingsContainer.appendChild(el);
         }
-    });
 
-// Add an event listener to the Next Page button
-    document.getElementById('nextPage').addEventListener('click', () => {
-        if (endIndex < data.data.length) {
-            currentPage++;
-            const selectedRegion = document.querySelector('.regionTeam.selected').getAttribute('value');
-            const selectedName = nameFilter.value;
-            fetchTeams(selectedRegion, selectedName, currentPage);
-        }
-    });
+        updatePageButtons(filteredData.length);
+      })
+      .catch(err => console.error('Teams fetch error:', err));
+  }
 
-// Add an event listener to the Search button
-    searchButton.addEventListener('click', () => {
-        const selectedRegion = document.querySelector('.regionTeam.selected').getAttribute('value');
-        const selectedName = nameFilter.value;
-        currentPage = 1; // Reset to the first page
-        fetchTeams(selectedRegion, selectedName, currentPage);
-    });
+  function updatePageButtons(totalItems) {
+    document.getElementById('prevPage').disabled = currentPage === 1;
+    document.getElementById('nextPage').disabled = endIndex >= totalItems;
+  }
 
-// Initial load with the "na" region selected and an empty name filter
-    document.querySelector('.regionTeam[value="na"]').click(); // Simulate a click on the "na" button
+  function getSelectedRegion() {
+    const active = document.querySelector('.regionTeam.selected');
+    return active ? active.getAttribute('value') : 'na';
+  }
+
+  regionBtns.forEach(btn => {
+    btn.addEventListener('click', function () {
+      regionBtns.forEach(b => b.classList.remove('selected'));
+      this.classList.add('selected');
+      currentPage = 1;
+      fetchTeams(this.getAttribute('value'), nameFilter.value, currentPage);
+    });
+  });
+
+  document.getElementById('prevPage').addEventListener('click', () => {
+    if (currentPage > 1) {
+      currentPage--;
+      fetchTeams(getSelectedRegion(), nameFilter.value, currentPage);
+    }
+  });
+
+  document.getElementById('nextPage').addEventListener('click', () => {
+    if (endIndex < data.length) {
+      currentPage++;
+      fetchTeams(getSelectedRegion(), nameFilter.value, currentPage);
+    }
+  });
+
+  searchButton.addEventListener('click', () => {
+    currentPage = 1;
+    fetchTeams(getSelectedRegion(), nameFilter.value, currentPage);
+  });
+
+  // Initial load — click NA button
+  document.querySelector('.regionTeam[value="na"]').click();
 });

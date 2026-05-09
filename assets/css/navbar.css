@@ -1,0 +1,187 @@
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 4%;
+    background-color: #0f1923;
+}
+
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    transition: all ease-in-out 0.3s;
+    background-color: #ff4655;
+}
+
+/* Navigation Menu */
+.nav-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 7vh;
+    z-index: 2;
+}
+
+.nav-item {
+    margin: 0 2px 4px 2px;
+}
+
+.nav-item a {
+    display: flex;
+    margin: auto;
+    padding: 0;
+    flex-direction: column;
+    justify-content: center;
+    height: 66px;
+    color: #f9f9f9;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 120%;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.nav-item p {
+    padding: 7.5px 16px;
+    text-align: center;
+    margin-right: 4px;
+}
+
+.nav-link {
+    position: relative;
+    font-size: 244%;
+    font-weight: 500;
+    color: #ff4655;
+    padding: 7.5px 16px;
+    text-align: center;
+    margin-right: 4px;
+    transition: all ease-in-out 0.2s;
+}
+
+.desktop-link-item-underline {
+    background-color: rgb(255, 70, 85);
+    height: 0;
+    width: 100%;
+    border-radius: 2px;
+}
+
+.nav-link:hover p {
+    background: rgba(128, 128, 128, .3);
+    border-radius: 10px;
+}
+
+.nav-link:hover .desktop-link-item-underline {
+    height: 4px;
+}
+
+.subMenu li {
+    margin: -25px 10px;
+}
+
+.subMenu .player-subMenu a, .subMenu .teams-subMenu a {
+    color: #f9f9f9;
+    letter-spacing: 0;
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 0;
+    text-transform: capitalize;
+    overflow: visible;
+}
+
+.nav-item .subMenu {
+    background-color: #292929;
+    box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, .2);
+    border-radius: 2px 2px 0 0;
+    text-align: left;
+    font-size: 13px;
+    min-width: 200px;
+    max-height: 200px;
+    position: absolute;
+    top: 59px;
+    transition: opacity .5s cubic-bezier(0.06, 0.81, 0, 0.98) 0s;
+    z-index: 2;
+    visibility: hidden;
+}
+
+.subMenu .player-subMenu {
+    margin-top: 5px;
+}
+
+.subMenu .teams-subMenu {
+    margin-bottom: 5px;
+}
+
+.nav-link-submenu {
+    color: #f9f9f9;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 120%;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 0;
+    flex-direction: column;
+    justify-content: center;
+    height: 66px;
+    position: relative;
+    text-align: center;
+    margin-right: 4px;
+    transition: all ease-in-out 0.2s;
+    align-content: center;
+    display: flex;
+}
+
+.nav-link-submenu h1 {
+    padding: 7.5px 16px;
+    text-align: center;
+    margin-right: 4px;
+    font-size: 13px;
+}
+
+.nav-link-submenu:hover h1 {
+    background: rgba(128, 128, 128, .3);
+    border-radius: 10px;
+}
+
+.subMenu {
+    list-style: none;
+    padding: 0;
+}
+
+.subMenu .player-subMenu p, .subMenu .teams-subMenu p {
+    padding: 16px 16px;
+}
+
+.subMenu p:hover {
+    background: rgba(128, 128, 128, .3);
+    border-radius: 10px;
+}
+
+.nav-item:hover .subMenu {
+    visibility: visible;
+    display: block;
+    opacity: 1;
+}
+
+.nav-item:hover .subMenu .desktop-link-item-underline {
+    height: 4px;
+}
+
+.nav-logo img {
+    width: 3rem;
+    transition: all ease-in-out 0.2s;
+}
+
+.nav-logo img:hover {
+    transform: scale(1.2);
+}

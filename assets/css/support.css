@@ -1,0 +1,133 @@
+/* Support page */
+.project-info {
+    width: 100%;
+    height: 100%;
+    padding: 70px 140px;
+}
+
+.project-info h1, .team-container h1 {
+    display: block;
+    font-size: 55px;
+    font-weight: 800;
+    line-height: 39px;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.accordion {
+    cursor: pointer;
+    padding: 10px 10px 10px 10px;
+    background-color: #0f1923;
+    border: none;
+    text-align: left;
+    width: 100%;
+    position: relative;
+    color: #e3dfd9;
+    margin-bottom: 10px;
+}
+
+.accordion:before {
+    content: "+";
+    position: absolute;
+    top: 50%;
+    right: 35px;
+    transform: translateY(-50%);
+    transition: transform 0.2s;
+    font-size: 50px;
+}
+
+.accordion h2 {
+    padding-left: 50px;
+}
+
+.active:before {
+    content: "-";
+    transform: translateY(-50%) rotate(180deg);
+    font-size: 50px;
+}
+
+.panel {
+    display: none;
+    padding: 10px;
+}
+
+.panel-container {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(2, 50%);
+}
+
+.panel-container li {
+    padding: 10% 20% 5% 20%;
+    margin: 10px;
+    border: 1px solid #e3dfd9;
+    border-radius: 20px;
+}
+
+.project-intro p, .project-details li {
+    text-align: center;
+    font-size: 15px;
+}
+
+.lineDivider {
+    background-color: #8b978f;
+    height: 4px;
+    width: 80%;
+    border-radius: 2px;
+    margin: 0 10%;
+}
+
+.dev-names {
+    width: 100%;
+    height: 100%;
+    padding: 70px 140px;
+    background: #fafafa;
+}
+
+.indie-profile-container {
+    display: grid;
+    margin: 0;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-flow: row;
+    padding-left: 5%;
+    padding-right: 5%;
+    gap: 0.5rem;
+}
+
+.names {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5%;
+}
+
+.names h1 {
+    display: block;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1.3;
+    text-align: center;
+    letter-spacing: 1px;
+    margin: 0.4rem 0 0.2rem;
+}
+
+.names:hover {
+    color: #e4373c;
+    border-color: #e4373c;
+    transition: all ease-in-out 0.1s;
+}
+
+.names a img {
+    border-radius: 100%;
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+}
+
+.names p {
+    text-align: center;
+    font-size: 14px;
+    margin: 0;
+    color: #888;
+}

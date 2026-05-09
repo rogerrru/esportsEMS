@@ -1,0 +1,116 @@
+/* Header */
+header {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden !important;
+    margin: 0 0 3% 0;
+}
+
+/* Video */
+.video-container {
+    width: 100%;
+    height: 50vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.text-overlay {
+    top: 0;
+    position: absolute;
+    color: #fffcfc;
+    width: 100%;
+    height: 100%;
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+.text-overlay h1 {
+    display: inline-block;
+    font-size: 2000%;
+    font-weight: 900;
+    line-height: 75%;
+    position: absolute;
+    bottom: 0;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+}
+
+.text-overlay p {
+    color: #fff;
+    font-size: 6vw;
+    font-weight: 900;
+    padding-left: 6px;
+    margin: 16% 0 16% 0;
+}
+
+.text-overlay .leaderboardP {
+    margin: 0;
+    width: 100%;
+}
+
+.myVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.myVideo2 {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.valo-img-container {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 1000px;
+    top: 0;
+}
+
+.valo-img-cropped {
+    display: flex;
+    object-fit: cover;
+    width: 100vh;
+    height: 82vh;
+    object-position: 30% 100%;
+}
+
+.valo-img {
+    position: absolute;
+    transition: all 0.1s;
+    z-index: 5;
+    width: auto;
+    height: 600px;
+}
+
+/* Header text */
+.header-text-container h1 {
+    font-size: 20rem;
+    justify-content: center;
+}
+
+.header-text-container h2 {
+    margin: 20px 0;
+}
+
+.header-text-container label {
+    margin: 20px 0;
+}
+
+.header-text-container .desc-container {
+    width: 30%;
+}
+
+.header-text-container img {
+    width: 3.5rem;
+}
+
+.header-text-container p {
+    font-size: 83%;
+    font-weight: 300;
+    text-align: justify;
+}

@@ -1,0 +1,18 @@
+{
+  "pro": {
+    "S+": ["Viper", "Killjoy", "Omen"],
+    "S":  ["Sova", "Jett", "Raze", "Cypher"],
+    "A":  ["KAY/O", "Skye", "Brimstone", "Sage"],
+    "B":  ["Chamber", "Fade", "Breach", "Gekko"],
+    "C":  ["Reyna", "Neon", "Phoenix", "Astra"],
+    "D":  ["Yoru", "Harbor", "Deadlock"]
+  },
+  "ranked": {
+    "S+": ["Reyna", "Jett", "Omen"],
+    "S":  ["Killjoy", "Raze", "Sage", "Neon"],
+    "A":  ["Viper", "Sova", "KAY/O", "Cypher"],
+    "B":  ["Brimstone", "Skye", "Chamber", "Fade"],
+    "C":  ["Phoenix", "Breach", "Astra", "Gekko"],
+    "D":  ["Yoru", "Harbor", "Deadlock"]
+  }
+}

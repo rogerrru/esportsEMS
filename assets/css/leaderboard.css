@@ -1,0 +1,469 @@
+/* Shared section wrapper */
+.top-players {
+    height: fit-content;
+    width: 100%;
+    padding: 0 9%;
+    position: relative;
+}
+
+.top-players h1 {
+    font-weight: 900;
+    font-size: 1000%;
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+.top-players h1 span {
+    font-weight: 300;
+}
+
+/* Search Bar */
+.search-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 3rem;
+    margin-top: 3rem;
+    flex-direction: row;
+    justify-content: center;
+    position: relative;
+}
+
+.search-bar p {
+    font-size: 1.8rem;
+    margin: 2rem 5rem 2rem 2rem;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    width: 50%;
+}
+
+#nameFilter {
+    background-color: #dbd9d2;
+    border: 1px solid #8b978f;
+    padding: 2rem;
+    margin-right: -5vh;
+    font-size: 1.8rem;
+    font-family: "Poppins", sans-serif;
+    max-width: 40.8rem;
+    width: 100%;
+}
+
+.search-bar .search-container #searchButton {
+    cursor: pointer;
+    padding: 10px;
+    position: relative;
+    right: 6%;
+    border-color: transparent;
+    display: flex;
+    background-color: transparent;
+}
+
+.search-bar .search-container .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Filter selects */
+.sectionWrapper {
+    grid-template-columns: 8.5% 71.5% 20%;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.region, .rank, .act {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.region label, .rank label, .act label {
+    color: #fff;
+    font-size: 14px;
+}
+
+.region select, .rank select, .act select {
+    cursor: pointer;
+    background-color: #0f1923;
+    border: 1px solid #8b978f;
+    color: #fffcfc;
+    padding: 3rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    text-align: center;
+    font-weight: 900;
+    font-size: 250%;
+    font-family: "Poppins", sans-serif;
+}
+
+.region select:hover, .rank select:hover, .act select:hover {
+    border: none;
+}
+
+/* Rankings container */
+.rankingsContainer {
+    background-color: #e3dfd9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
+/* Table */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+}
+
+th {
+    background-color: #ff4655;
+    color: #fff;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ff4655;
+    color: #fff;
+}
+
+/* Player rows */
+.player-info {
+    display: grid;
+    grid-template-columns: 8.5% 71.5% 20%;
+    align-items: center;
+    padding: 0 2rem 0 2rem;
+}
+
+.player-info p {
+    font-size: 120%;
+}
+
+.player-info-rank-container,
+.player-info-wins-container {
+    display: flex;
+    align-items: center;
+}
+
+.player-info-rating-container {
+    padding-left: 7%;
+}
+
+.player-info-rating-container p {
+    color: #39b54a;
+}
+
+li.player {
+    display: grid;
+    grid-template-columns: 8.5% 22% 49.5% 20%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid #ccc;
+}
+
+li.player:last-child {
+    border-bottom: none;
+}
+
+.player-rank-,
+.player-rating,
+.player-name,
+.player-wins {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.player-rank-container,
+.player-rating-container,
+.player-name-container,
+.player-wins-container {
+    display: flex;
+    align-items: center;
+    padding: 0 10px 0 10px;
+    background-color: #dbd9d2;
+}
+
+.player-rating-container img {
+    width: 20%;
+    height: auto;
+    margin: 4%;
+    padding: 2%;
+}
+
+.player-rank-container,
+.player-wins-container {
+    background-color: #e3dfd9;
+}
+
+.player-rank-container {
+    padding-left: 4rem;
+}
+
+.player-wins-container {
+    padding-left: 6vh;
+}
+
+.player-wins-container p {
+    font-size: 120%;
+    display: flex;
+    align-content: center;
+}
+
+/* Team rows */
+.sectionWrapperTeam {
+    background-color: #0f1923;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90px;
+}
+
+.regionTeam {
+    cursor: pointer;
+    background-color: #0f1923;
+    border: 1px solid #0f1923;
+    color: #fffcfc;
+    padding: 2rem 0;
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 75%;
+    width: 100%;
+    position: relative;
+    text-align: center;
+    font-weight: 900;
+    font-size: 200%;
+    font-family: "Poppins", sans-serif;
+}
+
+.regionTeam:hover {
+    background-color: #8b978f;
+    border-radius: 20%;
+}
+
+.team-info {
+    display: grid;
+    grid-template-columns: 8.5% 7% 44.5% 16% 12% 13%;
+    align-items: center;
+}
+
+.team-info p {
+    font-size: 120%;
+}
+
+.team-info-rank-container,
+.team-info-country-container {
+    display: flex;
+    align-items: center;
+}
+
+.team-info-name-container {
+    padding-left: 17%;
+}
+
+.team-info-rank-container {
+    padding-left: 33%;
+    padding-right: 33%;
+}
+
+.team-info-country-container {
+    padding-left: 17%;
+}
+
+.team-info-earnings-container {
+    padding-left: 17%;
+}
+
+.team-info-record-container {
+    padding-left: 17%;
+}
+
+div.team {
+    display: grid;
+    grid-template-columns: 8.5% 7% 44.5% 16% 12% 12%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid #ccc;
+}
+
+div.team:last-child {
+    border-bottom: none;
+}
+
+.team-rank,
+.team-name,
+.team-country {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.team-rank-container,
+.team-logo-container,
+.team-name-container,
+.team-country-container,
+.team-earnings-container,
+.team-record-container {
+    display: flex;
+    align-items: center;
+    padding: 0 10px 0 10px;
+    background-color: #dbd9d2;
+}
+
+.team-rank-container,
+.team-country-container {
+    background-color: #e3dfd9;
+}
+
+.team-rank-container {
+    padding-left: 3.5rem;
+    padding-right: 3.5rem;
+}
+
+.team-country-container {
+    padding-left: 2vh;
+}
+
+.team-record-container {
+    padding: 0 7vh 0 7vh;
+}
+
+.first-place .team-record-container {
+    padding: 0 5vh 0 5vh;
+}
+
+.team-country-container p {
+    font-size: 120%;
+    display: flex;
+    align-content: center;
+}
+
+.team-logo {
+    width: 50px;
+    height: 50px;
+    align-items: center;
+}
+
+.first-place {
+    font-size: 200%;
+}
+
+/* Events */
+.sectionWrapperEvent {
+    grid-template-columns: 81.5% 18.5%;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.status, .event {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.status label, .event label {
+    color: #fff;
+    font-size: 14px;
+}
+
+.status select, .event select {
+    cursor: pointer;
+    background-color: #0f1923;
+    border: 1px solid #8b978f;
+    color: #fffcfc;
+    padding: 3rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    text-align: center;
+    font-weight: 900;
+    font-size: 250%;
+    font-family: "Poppins", sans-serif;
+}
+
+.status select:hover, .event select:hover {
+    border: none;
+}
+
+.event-info {
+    display: grid;
+    grid-template-columns: 25.5% 25% 39.5% 10%;
+    align-items: center;
+    padding: 0 2rem 0 2rem;
+}
+
+.event-info p {
+    font-size: 120%;
+}
+
+.event-info-rank-container,
+.event-info-rating-container {
+    display: flex;
+    align-items: center;
+}
+
+li.event {
+    display: grid;
+    grid-template-columns: 25.5% 25% 39.5% 10%;
+    list-style: none;
+    margin: 0;
+    padding: 0 2rem 0 2rem;
+    border-bottom: 1px solid #ccc;
+}
+
+/* Pagination */
+.pagination {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+#prevPage, #nextPage {
+    background-color: #ff4655;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border: none;
+    margin: 0.5rem;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#prevPage:hover, #nextPage:hover {
+    background-color: #ce323f;
+}
+
+#prevPage:disabled, #nextPage:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}

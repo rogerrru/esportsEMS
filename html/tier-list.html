@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <title>VALORANT // TIER LIST</title>
+    <link rel="icon" href="../assets/media/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link rel="stylesheet" href="../assets/css/base.css" />
+    <link rel="stylesheet" href="../assets/css/navbar.css" />
+    <link rel="stylesheet" href="../assets/css/hero.css" />
+    <link rel="stylesheet" href="../assets/css/tierlist.css" />
+    <link rel="stylesheet" href="../assets/css/responsive.css" />
+</head>
+<body>
+<!-- NAVBAR -->
+<nav class="navbar"></nav>
+
+<!-- HEADER -->
+<header>
+    <div class="video-container">
+        <video autoplay muted loop class="myVideo">
+            <source src="../assets/media/agent-background-generic.mp4" type="video/mp4" />
+        </video>
+        <div class="valo-img-container">
+            <img src="../assets/media/agents-group-31d7ce5a3637e45d8b25d2fd03159e6c.png"
+                 alt="valo-img" class="valo-img" loading="lazy" />
+        </div>
+        <div class="text-overlay">
+            <p>VALORANT</p>
+            <h1>TIER LIST</h1>
+        </div>
+    </div>
+</header>
+
+<!-- TIER LIST SECTION -->
+<section class="tierlist-section">
+
+    <!-- Mode Toggle -->
+    <div class="tierlist-toggle-wrap">
+        <p class="toggle-label">VIEW MODE</p>
+        <div class="tierlist-toggle" role="group" aria-label="Tier list mode">
+            <button class="toggle-btn active" data-mode="pro" id="btnPro">
+                <i class="fas fa-trophy"></i> PROFESSIONAL PLAY
+            </button>
+            <button class="toggle-btn" data-mode="ranked" id="btnRanked">
+                <i class="fas fa-gamepad"></i> RANKED / COMPETITIVE
+            </button>
+        </div>
+        <p class="toggle-note" id="modeNote">Based on current VCT meta &amp; pick rates.</p>
+    </div>
+
+    <!-- Tier Table -->
+    <div class="tierlist-table" id="tierlistTable">
+        <!-- Rows injected by tier-list.js -->
+    </div>
+
+    <p class="tierlist-disclaimer">
+        Tier placements reflect current patch meta. Rankings update with each major patch.
+        Agent icons from <a href="https://valorant-api.com" target="_blank">valorant-api.com</a>.
+    </p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p><i class="fas fa-copyright"></i> 2023 TEAM DYNAMITE</p>
+    <p class="p2">All images, videos, and contents are property of RIOT GAMES</p>
+</footer>
+
+<!-- Scroll Reveal -->
+<script src="https://unpkg.com/scrollreveal"></script>
+<!-- JS -->
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/navbar.js"></script>
+<script src="../assets/js/index.js"></script>
+<script src="../assets/js/tier-list.js"></script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+/* Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&display=swap");
+
+/* Reset */
+* {
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    overflow-x: hidden;
+}
+
+html {
+    font-size: 62.5%;
+    font-family: "Poppins", sans-serif;
+    scroll-behavior: smooth;
+}
+
+body {
+    width: 100%;
+    background-color: #fafaf9;
+    background-image: url("../media/bg.png");
+    background-attachment: fixed;
+    background-size: cover;
+    margin: 0;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+hr {
+    margin: 0 auto;
+    width: 90%;
+    color: #ff4655;
+    border: 5px solid #ff4655;
+    align-items: center;
+}
+
+img {
+    overflow-x: hidden;
+}
+
+/* Footer */
+footer {
+    display: flex;
+    flex-direction: column;
+    background-color: #0f1923;
+    width: 100%;
+    height: 15vh;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(#0000002d 90%, #ff283a48),
+        url("https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/bltbded518020183769/5eb26f5389bac8148a8006cc/agent-background-generic.JPG");
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+footer img {
+    width: 40vh;
+    padding: 20px;
+}
+
+footer p {
+    font-size: 2rem;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+footer .p2 {
+    letter-spacing: 0;
+    font-weight: 300;
+    font-size: 1.5rem;
+}
+
+footer .social-media-container {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px;
+}
+
+footer a {
+    color: #fff;
+    opacity: 0.5;
+    font-size: 4rem;
+    transition: all 0.2s;
+}
+
+footer a:hover {
+    opacity: 1;
+}
+
+footer a img {
+    filter: grayscale(1);
+    width: 100px;
+}
+
+/* Dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.player {
+    display: flex;
+}

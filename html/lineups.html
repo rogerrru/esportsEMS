@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <title>VALORANT // LINEUPS</title>
+    <link rel="icon" href="../assets/media/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link rel="stylesheet" href="../assets/css/base.css" />
+    <link rel="stylesheet" href="../assets/css/navbar.css" />
+    <link rel="stylesheet" href="../assets/css/hero.css" />
+    <link rel="stylesheet" href="../assets/css/lineups.css" />
+    <link rel="stylesheet" href="../assets/css/responsive.css" />
+</head>
+<body>
+<!-- NAVBAR -->
+<nav class="navbar"></nav>
+
+<!-- HEADER -->
+<header>
+    <div class="video-container">
+        <video autoplay muted loop class="myVideo">
+            <source src="../assets/media/agent-background-generic.mp4" type="video/mp4" />
+        </video>
+        <div class="valo-img-container">
+            <img src="../assets/media/agents-group-31d7ce5a3637e45d8b25d2fd03159e6c.png"
+                 alt="valo-img" class="valo-img" loading="lazy" />
+        </div>
+        <div class="text-overlay">
+            <p>VALORANT</p>
+            <h1>LINEUPS</h1>
+        </div>
+    </div>
+</header>
+
+<!-- LINEUPS SECTION -->
+<section class="lineups-section">
+
+    <!-- Filter Bar -->
+    <div class="lineups-filters">
+        <div class="filter-group">
+            <label for="mapFilter">MAP</label>
+            <select id="mapFilter">
+                <option value="all">All Maps</option>
+                <option value="Ascent">Ascent</option>
+                <option value="Bind">Bind</option>
+                <option value="Haven">Haven</option>
+                <option value="Split">Split</option>
+                <option value="Fracture">Fracture</option>
+                <option value="Icebox">Icebox</option>
+                <option value="Breeze">Breeze</option>
+                <option value="Pearl">Pearl</option>
+                <option value="Lotus">Lotus</option>
+                <option value="Sunset">Sunset</option>
+                <option value="Abyss">Abyss</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label for="agentFilter">AGENT</label>
+            <select id="agentFilter">
+                <option value="all">All Agents</option>
+                <option value="Viper">Viper</option>
+                <option value="Sova">Sova</option>
+                <option value="Brimstone">Brimstone</option>
+                <option value="Cypher">Cypher</option>
+                <option value="Killjoy">Killjoy</option>
+                <option value="Astra">Astra</option>
+                <option value="Harbor">Harbor</option>
+                <option value="Fade">Fade</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label for="sideFilter">SIDE</label>
+            <select id="sideFilter">
+                <option value="all">Both Sides</option>
+                <option value="attack">Attack</option>
+                <option value="defense">Defense</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label for="lineupSearch">SEARCH</label>
+            <input type="text" id="lineupSearch" placeholder="Search lineups..." />
+        </div>
+        <button id="clearFilters" class="clear-btn">CLEAR</button>
+    </div>
+
+    <!-- Results count -->
+    <div class="lineups-meta">
+        <span id="lineupCount">Loading...</span>
+    </div>
+
+    <!-- Lineup Grid -->
+    <div class="lineups-grid" id="lineupsGrid">
+        <!-- Cards injected by lineups.js -->
+    </div>
+
+    <!-- Empty state -->
+    <div class="lineups-empty" id="lineupsEmpty" style="display:none;">
+        <p>No lineups found for your filters. Try a different combination.</p>
+    </div>
+</section>
+
+<!-- MODAL -->
+<div class="lineup-modal" id="lineupModal" aria-hidden="true">
+    <div class="lineup-modal-inner">
+        <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+        <div class="modal-header">
+            <span class="modal-badge-map"  id="modalMap"></span>
+            <span class="modal-badge-agent" id="modalAgent"></span>
+            <span class="modal-badge-side" id="modalSide"></span>
+            <span class="modal-badge-diff" id="modalDiff"></span>
+        </div>
+        <h2 id="modalTitle"></h2>
+        <p  id="modalPosition" class="modal-position"></p>
+        <p  id="modalDesc" class="modal-desc"></p>
+        <div class="modal-video-wrap">
+            <iframe id="modalVideo" src="" allowfullscreen loading="lazy"
+                    title="Lineup Video"></iframe>
+        </div>
+        <div class="modal-tags" id="modalTags"></div>
+    </div>
+</div>
+<div class="modal-backdrop" id="modalBackdrop"></div>
+
+<!-- FOOTER -->
+<footer>
+    <p><i class="fas fa-copyright"></i> 2023 TEAM DYNAMITE</p>
+    <p class="p2">All images, videos, and contents are property of RIOT GAMES</p>
+</footer>
+
+<!-- Scroll Reveal -->
+<script src="https://unpkg.com/scrollreveal"></script>
+<!-- JS -->
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/navbar.js"></script>
+<script src="../assets/js/index.js"></script>
+<script src="../assets/js/lineups.js"></script>
+</body>
+</html>

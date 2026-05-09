@@ -1,0 +1,154 @@
+/* ── Tier List Page ── */
+.tierlist-section {
+    padding: 4rem 5%;
+    min-height: 60vh;
+}
+
+/* Mode toggle */
+.tierlist-toggle-wrap {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.toggle-label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: .15em;
+    color: #8b978f;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.tierlist-toggle {
+    display: inline-flex;
+    gap: 0;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 2px solid #ff4655;
+}
+
+.toggle-btn {
+    background: transparent;
+    border: none;
+    color: #ff4655;
+    padding: 1.2rem 3rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+    font-family: "Poppins", sans-serif;
+    letter-spacing: .08em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    transition: background 0.2s, color 0.2s;
+}
+
+.toggle-btn.active {
+    background: #ff4655;
+    color: #fff;
+}
+
+.toggle-btn:hover:not(.active) {
+    background: rgba(255, 70, 85, 0.12);
+}
+
+.toggle-note {
+    margin-top: 1.2rem;
+    font-size: 1.3rem;
+    color: #8b978f;
+}
+
+/* Tier table */
+.tierlist-table {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 3rem;
+}
+
+.tier-row {
+    display: flex;
+    align-items: stretch;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #1a2530;
+    min-height: 80px;
+}
+
+.tier-label {
+    min-width: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.8rem;
+    font-weight: 900;
+    flex-shrink: 0;
+}
+
+.tier-agents {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    padding: 1.5rem 2rem;
+    background-color: #0f1923;
+    flex: 1;
+    align-items: center;
+}
+
+.tier-agent-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    width: 72px;
+    cursor: default;
+    transition: transform 0.15s;
+}
+
+.tier-agent-card:hover {
+    transform: translateY(-4px);
+}
+
+.tier-agent-card img {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: #1a2530;
+    object-fit: cover;
+    border: 2px solid transparent;
+    transition: border-color 0.15s;
+}
+
+.tier-agent-card:hover img {
+    border-color: #ff4655;
+}
+
+.tier-agent-card span {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #e3dfd9;
+    text-align: center;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+/* Tier row accent colors match tier labels */
+.tier-row[data-tier="S+"] { border-left: 4px solid #FFD700; }
+.tier-row[data-tier="S"]  { border-left: 4px solid #ff4655; }
+.tier-row[data-tier="A"]  { border-left: 4px solid #ff8c42; }
+.tier-row[data-tier="B"]  { border-left: 4px solid #f9c74f; }
+.tier-row[data-tier="C"]  { border-left: 4px solid #4cc9f0; }
+.tier-row[data-tier="D"]  { border-left: 4px solid #6c757d; }
+
+/* Disclaimer */
+.tierlist-disclaimer {
+    font-size: 1.2rem;
+    color: #8b978f;
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.tierlist-disclaimer a {
+    color: #ff4655;
+    text-decoration: underline;
+}
