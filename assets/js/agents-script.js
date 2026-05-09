@@ -1,7 +1,4 @@
 // SELECTORS
-const hamburger = document.querySelector('.hamburger');
-const bar       = document.querySelectorAll('.bar');
-const navMenu   = document.querySelector('.nav-menu');
 const sovaImg   = document.querySelectorAll('.valo-img, .valo-img-cropped');
 
 let abilitiesTextHead = document.getElementById('abilities-text-head');
@@ -20,32 +17,13 @@ sr.reveal('.other-agents h1',   { origin: 'left' });
 sr.reveal('.agent',             { delay: 500 });
 sr.reveal('.play-now',          {});
 
-hamburger.addEventListener('click', mobileMenu);
-
-function mobileMenu() {
-    hamburger.classList.toggle('active');
-    navMenu.classList.toggle('active');
-    bar.forEach(el => el.classList.toggle('active'));
-}
-
-const navLink = document.querySelectorAll('.nav-link');
-navLink.forEach(n => n.addEventListener('click', closeMenu));
-
 if (sovaImg.length > 0) {
     sovaImg.forEach(img => {
         window.addEventListener('scroll', () => {
-            let value = window.scrollY;
-            img.style.top = value * -0.05 + 'vh';
-            if (value > 250) img.style.top = -.50 + 'vh';
-            if (value === 0)  img.style.top = 10   + 'vh';
-        });
+            const value = window.scrollY;
+            img.style.top = value > 250 ? '-0.5vh' : `${value * -0.05}vh`;
+        }, { passive: true });
     });
-}
-
-function closeMenu() {
-    hamburger.classList.remove('active');
-    navMenu.classList.remove('active');
-    bar.forEach(el => el.classList.remove('active'));
 }
 
 // ── Agent video map (fetched from backend) ───────────────────────────────────

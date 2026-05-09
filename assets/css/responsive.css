@@ -1,4 +1,4 @@
-/* ── Desktop breakpoint (min 1280px) ── */
+/* ── Desktop (min 1280px) ───────────────────────────────────────────────── */
 @media (min-width: 1280px) {
     .header-text-container {
         position: absolute;
@@ -18,79 +18,41 @@
         margin-top: 7%;
     }
 
-    .desc-container h2 {
-        font-size: 150%;
-    }
-
-    .desc-container p {
-        font-size: 65%;
-    }
+    .desc-container h2 { font-size: 150%; }
+    .desc-container p  { font-size: 65%;  }
 }
 
-/* ── Mobile breakpoint (max 900px) ── */
+/* ── Tablet (max 1024px) ────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+    /* Magazine: featured card goes half-width on tablet */
+    .news-featured .news-item {
+        grid-template-columns: 1fr;
+    }
+
+    .news-featured .news-image,
+    .news-featured .news-image img,
+    .news-featured .news-image-placeholder {
+        height: 260px;
+        min-height: 260px;
+    }
+
+    /* Events grid: 2 columns */
+    .events-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+
+    /* Leaderboard table: horizontal scroll */
+    .rankingsContainer { overflow-x: auto; }
+
+    div.team,
+    li.player,
+    li.event { min-width: 600px; }
+}
+
+/* ── Mobile (max 900px) ─────────────────────────────────────────────────── */
 @media (max-width: 900px) {
-    /* Navbar */
-    .nav-menu {
-        position: fixed;
-        left: 0;
-        top: -100vh;
-        flex-direction: column;
-        justify-content: center;
-        background-color: #ff4655;
-        width: 100%;
-        height: 100vh;
-        padding: 50px 0;
-        text-align: center;
-        transition: 0.3s;
-        z-index: 10;
-    }
-
-    .nav-link {
-        color: #0f1923;
-        font-weight: 500;
-        font-size: 244%;
-    }
-
-    .nav-menu.active {
-        top: 0;
-        z-index: 10;
-    }
-
-    .nav-item {
-        margin: 2.5rem 0;
-    }
-
-    .hamburger {
-        display: block;
-        cursor: pointer;
-        z-index: 100;
-    }
-
-    .hamburger.active {
-        position: fixed;
-        right: 8vh;
-    }
-
-    .hamburger.active .bar:nth-child(2) {
-        opacity: 0;
-    }
-
-    .hamburger.active .bar:nth-child(1) {
-        transform: translateY(8px) rotate(45deg);
-    }
-
-    .hamburger.active .bar:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg);
-    }
-
-    .bar.active {
-        background-color: #0f1923;
-    }
-
     /* Header */
-    header {
-        margin-bottom: 30px;
-    }
+    header { margin-bottom: 30px; }
 
     .valo-img-cropped {
         position: absolute;
@@ -100,9 +62,8 @@
 
     .header-text-container {
         font-size: 3rem;
-        padding: 50px 0 30px 0;
+        padding: 50px 0 30px;
         color: #0f1923;
-        transition: all ease-in-out 0.2s;
     }
 
     .header-text-container .desc-container {
@@ -130,11 +91,34 @@
         justify-content: center;
     }
 
-    .header-text-container h2 img {
-        width: 5vw;
+    .header-text-container h2 img { width: 5vw; }
+
+    /* ── News magazine layout ─────────────────────────────────────────── */
+    .news-container {
+        grid-template-columns: 1fr;
+        padding: 1rem 3% 1.5rem;
     }
 
-    /* Abilities */
+    .news-featured {
+        grid-column: 1 / -1;
+    }
+
+    .news-featured .news-item {
+        grid-template-columns: 1fr;
+    }
+
+    .news-featured .news-image,
+    .news-featured .news-image img,
+    .news-featured .news-image-placeholder {
+        height: 220px;
+        min-height: 220px;
+    }
+
+    .news-filter-bar {
+        padding: 1rem 3% 0;
+    }
+
+    /* ── Agents ───────────────────────────────────────────────────────── */
     .skill-container {
         padding: 0 20px;
     }
@@ -154,13 +138,8 @@
         padding: 5px;
     }
 
-    .abilities-ico:hover {
-        box-shadow: none;
-    }
-
-    .abilities-ico.animate {
-        box-shadow: none;
-    }
+    .abilities-ico:hover  { box-shadow: none; }
+    .abilities-ico.animate{ box-shadow: none; }
 
     .abilities-container {
         height: fit-content;
@@ -170,18 +149,12 @@
         align-items: center;
     }
 
-    .abilities-vid {
+    .abilities-media {
         width: 100%;
         box-shadow: 7px 7px 0 0 #ff4655;
     }
 
-    .abilities-vid:hover {
-        transform: scale(1.1);
-        cursor: pointer;
-        box-shadow: 7px 0 0 0 #ff4655;
-    }
-
-    /* Agents grid */
+    /* ── Agents grid ──────────────────────────────────────────────────── */
     .other-agents {
         min-height: 100vh;
         width: 100%;
@@ -197,32 +170,20 @@
     .other-agents .agents-container {
         width: 100%;
         grid-template-columns: repeat(3, 30%);
-        grid-template-rows: repeat(8, 18%);
     }
 
-    .other-agents .agents-container img {
-        width: 100%;
-    }
+    .other-agents .agents-container img { width: 100%; }
 
-    /* Play Now */
+    /* ── Play Now ─────────────────────────────────────────────────────── */
     .play-now {
         display: flex;
         flex-direction: column;
         margin: 3rem;
     }
 
-    .play-now button {
-        padding: 1rem 1rem;
-    }
+    .play-now button { padding: 1rem; }
 
-    /* Footer */
-    .footer {
-        height: 100vh;
-        padding: 0 3rem;
-        text-align: center;
-    }
-
-    /* Lineups responsive */
+    /* ── Lineups ──────────────────────────────────────────────────────── */
     .lineups-filters {
         flex-direction: column;
         align-items: stretch;
@@ -236,33 +197,97 @@
         gap: 1.5rem;
     }
 
-    /* Tier list responsive */
-    .tierlist-toggle {
-        flex-direction: column;
-        gap: 1rem;
-    }
+    /* ── Tier list ────────────────────────────────────────────────────── */
+    .tierlist-toggle { flex-direction: column; gap: 1rem; }
 
-    .tier-row {
-        flex-direction: column;
-    }
+    .tier-row { flex-direction: column; }
 
     .tier-label {
         width: 100%;
         min-height: 3.5rem;
     }
 
-    .tier-agents {
-        flex-wrap: wrap;
+    .tier-agents { flex-wrap: wrap; }
+
+    /* ── Events page ──────────────────────────────────────────────────── */
+    .events-main { padding: 2rem 3%; }
+
+    .events-section-header {
+        flex-direction: column;
+        align-items: flex-start;
     }
 
-    /* Leaderboard table horizontal scroll */
-    .rankingsContainer {
-        overflow-x: auto;
+    .events-grid {
+        grid-template-columns: 1fr;
     }
+
+    .match-header-row,
+    .match-row {
+        grid-template-columns: 1.5fr 1fr 2fr 1fr;
+        font-size: 0.72rem;
+    }
+
+    .matches-controls {
+        flex-direction: column;
+    }
+
+    /* ── Leaderboard table ────────────────────────────────────────────── */
+    .rankingsContainer { overflow-x: auto; }
 
     div.team,
     li.player,
-    li.event {
-        min-width: 600px;
+    li.event { min-width: 600px; }
+
+    /* ── Support team grid ────────────────────────────────────────────── */
+    .project-info {
+        padding: 40px 5%;
+    }
+
+    .dev-names {
+        padding: 40px 5%;
+    }
+
+    .indie-profile-container {
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+        gap: 0.5rem;
+    }
+
+    /* ── Search overlay ───────────────────────────────────────────────── */
+    .search-overlay { padding: 1rem 3%; }
+
+    /* ── Footer ───────────────────────────────────────────────────────── */
+    .footer {
+        height: 100vh;
+        padding: 0 3rem;
+        text-align: center;
+    }
+}
+
+/* ── Small mobile (max 480px) ────────────────────────────────────────────── */
+@media (max-width: 480px) {
+    .news-container {
+        padding: 0.75rem 2% 1rem;
+    }
+
+    .events-tab-bar,
+    .events-tab-bar { flex-wrap: wrap; }
+
+    .match-header-row,
+    .match-row {
+        grid-template-columns: 2fr 1fr;
+        gap: 0.25rem;
+    }
+
+    .match-round,
+    .match-score-wrap {
+        display: none;
+    }
+
+    .indie-profile-container {
+        grid-template-columns: repeat(auto-fill, minmax(95px, 1fr));
+    }
+
+    .news-featured .news-overlay-title {
+        font-size: 0.9rem;
     }
 }
