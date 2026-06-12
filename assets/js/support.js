@@ -69,6 +69,7 @@ const names = [
     teamNames.className = 'indie-profile-container';
     const nameContainer = document.querySelector(".name-container");
      names.forEach(person => {
+         if (!person[0].f_name && !person[0].l_name) return;
          const listItem = document.createElement('li');
          listItem.className = 'names';
          listItem.innerHTML = `
@@ -84,14 +85,6 @@ const names = [
      nameContainer.appendChild(teamNames);
  }
  loadSupport()
-function changeBackgroundImage(imageUrl) {
-    const body = document.body;
-    body.style.backgroundImage = `url(${imageUrl})`;
-    body.style.backgroundSize = 'cover';
-    body.style.backgroundRepeat = 'no-repeat';
-    body.style.backgroundAttachment = 'fixed';
-}
-changeBackgroundImage("#fafafa");
 
 var accordions = document.getElementsByClassName("accordion");
 var i;

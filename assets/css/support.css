@@ -81,7 +81,7 @@
     width: 100%;
     height: 100%;
     padding: 70px 140px;
-    background: #fafafa;
+    background: #0a0e13;
 }
 
 /* Fluid auto-fit grid — columns size themselves to fit all members evenly */
@@ -98,8 +98,8 @@
     align-items: center;
     justify-content: flex-start;
     padding: 1rem 0.5rem;
-    background: #f5f3ef;
-    border: 1px solid #e0ddd7;
+    background: #141f29;
+    border: 1px solid #1e2d3d;
     transition: border-color 0.15s ease, box-shadow 0.15s ease;
     text-align: center;
 }
@@ -135,13 +135,13 @@
     font-weight: 800;
     line-height: 1.3;
     letter-spacing: 0.5px;
-    color: #0f1923;
+    color: #e3dfd9;
     margin: 0;
 }
 
 .names p {
     font-size: 11px;
-    color: #888;
+    color: #8b978f;
     margin: 0;
     word-break: break-all;
 }

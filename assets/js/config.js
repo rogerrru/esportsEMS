@@ -4,8 +4,9 @@
 const CONFIG = {
   API_BASE_URL: (function () {
     const h = window.location.hostname;
-    return h === 'localhost' || h === '127.0.0.1'
+    // '' = file:// protocol (opened directly), localhost / 127.0.0.1 = local dev server
+    return h === '' || h === 'localhost' || h === '127.0.0.1'
       ? 'http://localhost:3000'
-      : 'https://valowiki-api.onrender.com'; // <-- update after Render deployment
+      : 'https://valowiki-api.onrender.com';
   })()
 };

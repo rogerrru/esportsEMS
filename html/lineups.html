@@ -4,29 +4,44 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-    <title>VALORANT // LINEUPS</title>
+    <title>VALORANT — Lineups</title>
     <link rel="icon" href="../assets/media/logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
-    <link rel="stylesheet" href="../assets/css/base.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            valo: {
+              red: '#ff4655', 'red-dark': '#ce323f',
+              dark: '#0a0e13', navy: '#0f1923', card: '#141f29',
+              border: '#1e2d3d', 'border-light': '#2a3f52',
+              text: '#e3dfd9', muted: '#8b978f', dim: '#4a5a65',
+            }
+          },
+          fontFamily: { sans: ['Poppins', 'sans-serif'] }
+        }
+      }
+    }
+    </script>
     <link rel="stylesheet" href="../assets/css/navbar.css" />
     <link rel="stylesheet" href="../assets/css/hero.css" />
-    <link rel="stylesheet" href="../assets/css/lineups.css" />
-    <link rel="stylesheet" href="../assets/css/responsive.css" />
+    <link rel="stylesheet" href="../assets/css/valo.css" />
 </head>
 <body>
+
 <!-- NAVBAR -->
 <nav class="navbar"></nav>
 
-<!-- HEADER -->
+<!-- HERO -->
 <header>
     <div class="video-container">
         <video autoplay muted loop class="myVideo">
             <source src="../assets/media/agent-background-generic.mp4" type="video/mp4" />
         </video>
         <div class="valo-img-container">
-            <img src="../assets/media/agents-group-31d7ce5a3637e45d8b25d2fd03159e6c.png"
-                 alt="valo-img" class="valo-img" loading="lazy" />
+            <img src="../assets/media/agents-group-31d7ce5a3637e45d8b25d2fd03159e6c.png" alt="valo-img" class="valo-img" loading="lazy" />
         </div>
         <div class="text-overlay">
             <p>VALORANT</p>
@@ -92,9 +107,7 @@
     </div>
 
     <!-- Lineup Grid -->
-    <div class="lineups-grid" id="lineupsGrid">
-        <!-- Cards injected by lineups.js -->
-    </div>
+    <div class="lineups-grid" id="lineupsGrid"></div>
 
     <!-- Empty state -->
     <div class="lineups-empty" id="lineupsEmpty" style="display:none;">
@@ -107,17 +120,16 @@
     <div class="lineup-modal-inner">
         <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
         <div class="modal-header">
-            <span class="modal-badge-map"  id="modalMap"></span>
+            <span class="modal-badge-map" id="modalMap"></span>
             <span class="modal-badge-agent" id="modalAgent"></span>
             <span class="modal-badge-side" id="modalSide"></span>
             <span class="modal-badge-diff" id="modalDiff"></span>
         </div>
         <h2 id="modalTitle"></h2>
-        <p  id="modalPosition" class="modal-position"></p>
-        <p  id="modalDesc" class="modal-desc"></p>
+        <p id="modalPosition" class="modal-position"></p>
+        <p id="modalDesc" class="modal-desc"></p>
         <div class="modal-video-wrap">
-            <iframe id="modalVideo" src="" allowfullscreen loading="lazy"
-                    title="Lineup Video"></iframe>
+            <iframe id="modalVideo" src="" allowfullscreen loading="lazy" title="Lineup Video"></iframe>
         </div>
         <div class="modal-tags" id="modalTags"></div>
     </div>
@@ -130,9 +142,7 @@
     <p class="p2">All images, videos, and contents are property of RIOT GAMES</p>
 </footer>
 
-<!-- Scroll Reveal -->
 <script src="https://unpkg.com/scrollreveal"></script>
-<!-- JS -->
 <script src="../assets/js/config.js"></script>
 <script src="../assets/js/navbar.js"></script>
 <script src="../assets/js/index.js"></script>

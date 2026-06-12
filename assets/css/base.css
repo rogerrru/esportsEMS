@@ -19,10 +19,8 @@ html {
 
 body {
     width: 100%;
-    background-color: #fafaf9;
-    background-image: url("../media/bg.png");
-    background-attachment: fixed;
-    background-size: cover;
+    background-color: #0a0e13;
+    color: #e3dfd9;
     margin: 0;
 }
 
@@ -113,9 +111,11 @@ footer a img {
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f9f9f9;
+    background-color: #141f29;
+    border: 1px solid #2a3f52;
+    color: #e3dfd9;
     min-width: 160px;
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
     z-index: 1;
 }
 
@@ -123,6 +123,3 @@ footer a img {
     display: block;
 }
 
-.player {
-    display: flex;
-}

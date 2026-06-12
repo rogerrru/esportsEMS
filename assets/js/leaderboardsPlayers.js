@@ -1,148 +1,100 @@
-// Declare data, startIndex, and endIndex variables in a wider scope
-let data = []; // Initialize as an empty array
-let startIndex = 0;
-let endIndex = 0;
-
-// FUNCTIONS
 document.addEventListener('DOMContentLoaded', () => {
-    const nameFilter = document.getElementById('nameFilter');
-    const regionSelect = document.getElementById('regionSelect');
-    const rankSelect = document.getElementById('rankSelect');
-    const seasonSelect = document.getElementById('seasonSelect');
-    const searchButton = document.getElementById('searchButton'); // New Search Button
-    const rankingsContainer = document.querySelector('.rankingsContainer');
-    let currentPage = 1;
+  const nameFilter        = document.getElementById('nameFilter');
+  const regionSelect      = document.getElementById('regionSelect');
+  const rankSelect        = document.getElementById('rankSelect');
+  const searchButton      = document.getElementById('searchButton');
+  const rankingsContainer = document.querySelector('.rankingsContainer');
 
-    function fetchAndDisplayLeaderboard(region, rank, name, page, season) {
-        // Build the URL with the selected region
-        const apiUrl = `https://api.henrikdev.xyz/valorant/v2/leaderboard/${region}?season=${season}`;
-        console.log(apiUrl);
+  const PER_PAGE = 10;
+  let allPlayers   = [];
+  let filteredData = [];
+  let currentPage  = 1;
 
-        // Get the selected rank from the dropdown
-        const selectedRank = parseInt(rank);
+  // competitiveTier values from Riot API (post-Ascendant): 27=Radiant, 26=Imm3, 25=Imm2, 24=Imm1
+  const TIER_BADGE = {
+    27: '../assets/media/leaderboards-radiant-badge.png',
+    26: '../assets/media/leaderboards-immortal-badge.png',
+    25: '../assets/media/leaderboards-immortal-badge.png',
+    24: '../assets/media/leaderboards-immortal-badge.png',
+  };
+  const TIER_NAME = { 27: 'Radiant', 26: 'Immortal 3', 25: 'Immortal 2', 24: 'Immortal 1' };
 
-        // Fetch data from the API using the URL
-        rankingsContainer.innerHTML = '';
-        fetch(apiUrl)
-            .then((response) => response.json())
-            .then((fetchedData) => {
-                // Filter the data based on rank and name
-                data = fetchedData; // Assign fetchedData to the global data variable
-                console.log(data);
+  async function fetchLeaderboard(region) {
+    rankingsContainer.innerHTML = '<p style="padding:2rem;text-align:center;color:#888;">Loading…</p>';
+    try {
+      const res  = await fetch(`${CONFIG.API_BASE_URL}/api/val/leaderboard/${region}?size=200`);
+      const json = await res.json();
+      if (json.error) throw new Error(json.error);
+      allPlayers = json.players || [];
+      applyFilters();
+    } catch (err) {
+      console.error('Leaderboard error:', err);
+      rankingsContainer.innerHTML =
+        `<p style="padding:2rem;color:#ff4655;text-align:center;">Failed to load leaderboard: ${err.message}</p>`;
+    }
+  }
 
-                const rankMappings = [data.radiant_threshold, data.immortal_3_threshold, data.immortal_2_threshold, data.immortal_1_threshold];
-                console.log(rankMappings);
+  function applyFilters() {
+    const name       = nameFilter.value.toLowerCase();
+    const tierFilter = parseInt(rankSelect.value);
 
-                // Filter the data based on rank and name
-                let filteredData = data.players.filter((player) => {
-                    const playerName = `${player.gameName.toLowerCase()}#${player.tagLine.toLowerCase()}`;
-                    const filterName = name.toLowerCase();
-                    const playerRankedRating = parseInt(player.rankedRating);
+    filteredData = allPlayers.filter(p => {
+      const tag         = `${p.gameName}#${p.tagLine}`.toLowerCase();
+      const matchesName = !name || tag.includes(name);
+      const matchesTier = tierFilter === 0 || p.competitiveTier === tierFilter;
+      return matchesName && matchesTier;
+    });
 
-                    return (
-                        playerName.includes(filterName) &&
-                        (
-                            (rankMappings[selectedRank] === 450 && playerRankedRating >= 450) ||
-                            (rankMappings[selectedRank] === 200 && playerRankedRating >= 200 && playerRankedRating < 450) ||
-                            (rankMappings[selectedRank] === 90 && playerRankedRating >= 90 && playerRankedRating < 200) ||
-                            (rankMappings[selectedRank] === 0 && playerRankedRating > 0 && playerRankedRating < 90)
-                        )
-                    );
-                });
+    currentPage = 1;
+    renderPage();
+  }
 
-                // Calculate startIndex and endIndex based on the filtered data
-                const resultsPerPage = 10;
-                startIndex = (page - 1) * resultsPerPage;
-                endIndex = Math.min(startIndex + resultsPerPage, filteredData.length);
+  function renderPage() {
+    rankingsContainer.innerHTML = '';
+    const start = (currentPage - 1) * PER_PAGE;
+    const slice = filteredData.slice(start, start + PER_PAGE);
 
-                // Create and append elements to display the filtered leaderboard data for the current page
-                for (let i = startIndex; i < endIndex; i++) {
-                    const player = filteredData[i];
-                    const playerElement = document.createElement('li');
-                    playerElement.classList.add('player');
-                    if (player.leaderboardRank === 1) {
-                        playerElement.classList.add('first-place'); // Add a class for styling
-                    }
-                    playerElement.innerHTML = `
-                        <div class = "player-rank-container">
-                            <h3 class="player-rank">${player.leaderboardRank}
-                            </h3>
-                        </div>
-                        <div class="player-rating-container">
-                            <img class = "icon-container"/>
-                            <h2 class="player-points">${player.rankedRating}</h2>
-                        </div>
-                        <div class="player-name-container">
-                            <h2 class="player-name">${player.gameName}<span>#${player.tagLine}</span>
-                            </h2>
-                        </div>
-                        <div  class="player-wins-container">
-                            <p>
-                                <span class="player-wins">${player.numberOfWins}
-                                </span>
-                                <span>Games Won</span>
+    if (!slice.length) {
+      rankingsContainer.innerHTML =
+        '<p style="padding:2rem;text-align:center;color:#888;">No players found.</p>';
+    } else {
+      slice.forEach(p => {
+        const el  = document.createElement('li');
+        el.classList.add('player');
+        if (p.leaderboardRank === 1) el.classList.add('first-place');
 
-                            </p>
-                        </div>
-                    `;
-                    rankingsContainer.appendChild(playerElement);
-                    const rankImg = playerElement.querySelector('.icon-container');
-                    if (rankMappings[selectedRank] === 450 && player.rankedRating >= 450) {
-                        rankImg.src = "/assets/media/leaderboards-radiant-badge.png";
-                        rankImg.alt = "Radiant Badge";
-                    } else if (
-                        rankMappings[selectedRank] === 200 && player.rankedRating >= 200 && player.rankedRating < 450 ||
-                        rankMappings[selectedRank] === 90 && player.rankedRating >= 90 && player.rankedRating < 200 ||
-                        rankMappings[selectedRank] === 0 && player.rankedRating > 0 && player.rankedRating < 90
-                    ) {
-                        rankImg.src = "/assets/media/leaderboards-immortal-badge.png";
-                        rankImg.alt = "Immortal Badge";
-                    }
-                }
-                updatePageButtons();
-            })
-            .catch((error) => {
-                console.error('Fetch error:', error);
-            });
+        const badge = TIER_BADGE[p.competitiveTier] || TIER_BADGE[24];
+        const label = TIER_NAME[p.competitiveTier]  || 'Immortal';
+
+        el.innerHTML = `
+          <div class="player-rank-container">
+            <h3 class="player-rank">${p.leaderboardRank}</h3>
+          </div>
+          <div class="player-rating-container">
+            <img class="icon-container" src="${badge}" alt="${label}">
+            <h2 class="player-points">${p.rankedRating}</h2>
+          </div>
+          <div class="player-name-container">
+            <h2 class="player-name">${p.gameName}<span>#${p.tagLine}</span></h2>
+          </div>
+          <div class="player-wins-container">
+            <p><span class="player-wins">${p.numberOfWins}</span> <span>Games Won</span></p>
+          </div>`;
+        rankingsContainer.appendChild(el);
+      });
     }
 
-    function updatePageButtons() {
-        const prevPageButton = document.getElementById('prevPage');
-        const nextPageButton = document.getElementById('nextPage');
-        prevPageButton.disabled = currentPage === 1;
-        nextPageButton.disabled = endIndex >= data.players.length;
-    }
+    const totalPages = Math.ceil(filteredData.length / PER_PAGE) || 1;
+    document.getElementById('prevPage').disabled = currentPage === 1;
+    document.getElementById('nextPage').disabled = currentPage >= totalPages;
+  }
 
-    // Add event listeners to the page buttons
-    document.getElementById('prevPage').addEventListener('click', () => {
-        if (currentPage > 1) {
-            currentPage--;
-            fetchAndDisplayLeaderboard(regionSelect.value, parseInt(rankSelect.value), nameFilter.value, currentPage, seasonSelect.value);
-        }
-    });
+  regionSelect.addEventListener('change', () => fetchLeaderboard(regionSelect.value));
+  rankSelect.addEventListener('change', applyFilters);
+  searchButton.addEventListener('click', applyFilters);
+  nameFilter.addEventListener('keydown', e => { if (e.key === 'Enter') applyFilters(); });
+  document.getElementById('prevPage').addEventListener('click', () => { currentPage--; renderPage(); });
+  document.getElementById('nextPage').addEventListener('click', () => { currentPage++; renderPage(); });
 
-    document.getElementById('nextPage').addEventListener('click', () => {
-        if (endIndex < data.players.length) {
-            currentPage++;
-            fetchAndDisplayLeaderboard(regionSelect.value, parseInt(rankSelect.value), nameFilter.value, currentPage, seasonSelect.value);
-        }
-    });
-
-    // Add an event listener to the new Search button
-    searchButton.addEventListener('click', () => {
-        fetchAndDisplayLeaderboard(regionSelect.value, parseInt(rankSelect.value), nameFilter.value, 1, seasonSelect.value);
-    });
-
-    // Add event listeners to the filters
-    regionSelect.addEventListener('change', () => {
-        fetchAndDisplayLeaderboard(regionSelect.value, parseInt(rankSelect.value), nameFilter.value, 1, seasonSelect.value);
-    });
-
-    rankSelect.addEventListener('change', () => {
-        fetchAndDisplayLeaderboard(regionSelect.value, parseInt(rankSelect.value), nameFilter.value, 1, seasonSelect.value);
-    });
-    seasonSelect.addEventListener('change', () => {
-        fetchAndDisplayLeaderboard(regionSelect.value, parseInt(rankSelect.value), nameFilter.value, 1, seasonSelect.value);
-    });
-    fetchAndDisplayLeaderboard('na', 0, '', currentPage, 'e7a3');
+  fetchLeaderboard('na');
 });

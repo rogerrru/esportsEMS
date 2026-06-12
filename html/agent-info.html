@@ -1,103 +1,101 @@
 <!DOCTYPE html>
-  <html lang="en">
-  <head>
+<html lang="en">
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <title>Valorant Agent</title>
-    <link rel = "icon" href = "../assets/media/logo.png" type = "image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="icon" href="../assets/media/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/v4-shims.css" />
-    <link rel="stylesheet" href="../assets/css/base.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            valo: {
+              red: '#ff4655', 'red-dark': '#ce323f',
+              dark: '#0a0e13', navy: '#0f1923', card: '#141f29',
+              border: '#1e2d3d', 'border-light': '#2a3f52',
+              text: '#e3dfd9', muted: '#8b978f', dim: '#4a5a65',
+            }
+          },
+          fontFamily: { sans: ['Poppins', 'sans-serif'] }
+        }
+      }
+    }
+    </script>
     <link rel="stylesheet" href="../assets/css/navbar.css" />
     <link rel="stylesheet" href="../assets/css/hero.css" />
-    <link rel="stylesheet" href="../assets/css/agents.css" />
-    <link rel="stylesheet" href="../assets/css/responsive.css" />
-  </head>
-  <body>
-  <!-- NAVBAR -->
-  <nav class="navbar">
-  </nav>
-  <!-- END OF NAVBAR -->
+    <link rel="stylesheet" href="../assets/css/valo.css" />
+</head>
+<body>
 
-    <!-- HEADER -->
-    <header>
-      <video autoplay muted loop class="myVideo">
+<!-- NAVBAR -->
+<nav class="navbar"></nav>
+
+<!-- HERO -->
+<header>
+    <video autoplay muted loop class="myVideo">
         <source src="../assets/media/agent-background-generic2.mp4" type="video/mp4" />
-      </video>
-      <div class="valo-img-container">
-        <img src="" alt="valo-img" class="valo-img-cropped" id = "fullIcon"/>
-      </div>
-      <div class="header-text-container">
+    </video>
+    <div class="valo-img-container">
+        <img src="" alt="valo-img" class="valo-img-cropped" id="fullIcon" />
+    </div>
+    <div class="header-text-container">
         <h1 id="agent-name" class="adjust-text-size"></h1>
         <div class="desc-container">
-          <p>// ROLE</p>
-          <h2 id = "typeIcon" ></h2>
-          <p>// BIOGRAPHY</p>
-          <p id = "agent-description">
-          </p>
+            <p>// ROLE</p>
+            <h2 id="typeIcon"></h2>
+            <p>// BIOGRAPHY</p>
+            <p id="agent-description"></p>
         </div>
-      </div>
-    </header>
-    <!-- END OF HEADER -->
-
-    <!-- SKILL -->
-  <section class="skill-container" id="skill">
-    <h1>//SPECIAL ABILITIES</h1>
-    <div class="abilities-container">
-      <div class="abilities-button-text">
-        <div class="abilities-button">
-          <div class="radio-container">
-            <!-- Radio buttons will be generated dynamically -->
-          </div>
-          <!-- JavaScript will generate buttons here -->
-        </div>
-        <br />
-        <div class="abilities-text">
-          <h2 id="abilities-text-head">Choose ability by pressing a button above</h2>
-          <br />
-          <p id="abilities-text-body"></p>
-        </div>
-        <br />
-      </div>
-      <div class="abilities-media" id="abilities-media">
-        <div class="ability-no-video">
-          <p class="ability-no-video-name">Select an ability above</p>
-        </div>
-      </div>
     </div>
-  </section>
-  <hr />
-    <!-- END OF SKILL -->
-    <!-- OTHER AGENTS -->
-    <section class="other-agents">
-      <h1><span>//</span> AGENTS</h1>
-      <div class="agents-container" id="agent-sel">
-      </div>
-    </section>
-    <!-- END OF OTHER AGENTS -->
+</header>
 
-    <!-- PLAY NOW -->
-    <section class="play-now" id="play-now">
-      <button>PLAY NOW</button>
-    </section>
-    <br /><br /><br /><br /><br />
-    <!-- END OF PLAY NOW -->
+<!-- ABILITIES -->
+<section class="skill-container" id="skill">
+    <h1>// SPECIAL ABILITIES</h1>
+    <div class="abilities-container">
+        <div class="abilities-button-text">
+            <div class="abilities-button">
+                <div class="radio-container"></div>
+            </div>
+            <div class="abilities-text">
+                <h2 id="abilities-text-head">Select an ability above</h2>
+                <p id="abilities-text-body"></p>
+            </div>
+        </div>
+        <div class="abilities-media" id="abilities-media">
+            <div class="ability-no-video">
+                <p class="ability-no-video-name">Select an ability above</p>
+            </div>
+        </div>
+    </div>
+</section>
 
-    <!-- FOOTER -->
-    <footer>
-      <p><i class="fas fa-copyright"></i> 2023 TEAM DYNAMITE</p>
-      <p class="p2">All images, videos, and contents are property of RIOT GAMES</p>
-    </footer>
-    <!-- END OF FOOTER -->
+<hr />
 
-    <!-- Scroll Reveal -->
-    <script src="https://unpkg.com/scrollreveal"></script>
+<!-- OTHER AGENTS -->
+<section class="other-agents">
+    <h1><span>//</span> AGENTS</h1>
+    <div class="agents-container" id="agent-sel"></div>
+</section>
 
-    <!-- My JS -->
-    <script src="../assets/js/config.js"></script>
-    <script src="../assets/js/navbar.js"></script>
-    <script src="../assets/js/agents-script.js"></script>
-  </body>
+<!-- PLAY NOW -->
+<section class="play-now">
+    <button>PLAY NOW</button>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p><i class="fas fa-copyright"></i> 2023 TEAM DYNAMITE</p>
+    <p class="p2">All images, videos, and contents are property of RIOT GAMES</p>
+</footer>
+
+<script src="https://unpkg.com/scrollreveal"></script>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/navbar.js"></script>
+<script src="../assets/js/agents-script.js"></script>
+</body>
 </html>
