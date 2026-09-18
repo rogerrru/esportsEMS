@@ -51,13 +51,18 @@ app.get('/api/news', async (_req, res) => {
     $('a.wf-module-item').each((_, el) => {
       const href = $(el).attr('href') || '';
       if (!href.match(/^\/\d+\//)) return;
-      const nonMeta = $(el).children().not('.ge-text-light');
-      const title   = nonMeta.eq(0).text().trim();
-      const desc    = nonMeta.eq(1).text().trim();
-      const meta    = $(el).find('.ge-text-light').first().text().trim();
-      const byIdx   = meta.search(/\s+by\s+/i);
-      const date    = byIdx >= 0 ? meta.slice(0, byIdx).trim() : meta;
-      if (title) segments.push({ title, description: desc, date, url_path: href, img: null });
+      // Markup: <a><div><div>title</div><div>description</div><div.ge-text-light>flag • date • by author</div></div></a>
+      const body    = $(el).children('div').first();
+      const nonMeta = body.children('div').not('.ge-text-light');
+      const clean   = s => s.replace(/\s+/g, ' ').trim();
+      const title   = clean(nonMeta.eq(0).text());
+      const desc    = clean(nonMeta.eq(1).text());
+      const metaParts = clean(body.find('.ge-text-light').first().text())
+        .split('•').map(s => s.trim()).filter(Boolean);
+      const byPart  = metaParts.find(p => /^by\s/i.test(p)) || '';
+      const date    = metaParts.find(p => !/^by\s/i.test(p)) || '';
+      const author  = byPart.replace(/^by\s+/i, '');
+      if (title) segments.push({ title, description: desc, date, author, url_path: href, img: null });
     });
     const result = { data: { segments } };
     setCache('news', result);
@@ -198,7 +203,8 @@ function parseEvents($) {
       .clone().find('.event-item-desc-item-label').remove().end().text().trim();
     const dates = $(el).find('.event-item-desc-item.mod-dates')
       .clone().find('.event-item-desc-item-label').remove().end().text().trim();
-    const img = $(el).find('img').first().attr('src') || null;
+    let img = $(el).find('img').first().attr('src') || null;
+    if (img && img.startsWith('//')) img = `https:${img}`;   // protocol-relative breaks on file:// and http://localhost
     events.push({ title, status, prizepool: prize || '', dates: dates || '', img, url: href });
   });
   return events;
@@ -351,7 +357,13 @@ app.get('/api/article', async (req, res) => {
     const heroImg = $('meta[property="og:image"]').attr('content') || null;
     const paragraphs = [];
     $('.article-body p').each((_, el) => {
-      const text = $(el).text().trim();
+      // Inline team/player mentions embed a hover card (roster, rank…) — drop it
+      const clone = $(el).clone();
+      clone.find('.wf-hover-card').remove();
+      const text = clone.text().replace(/\s+/g, ' ')
+        .replace(/\s+([,.;:!?])/g, '$1')      // "FOKUS , KPI" → "FOKUS, KPI" (gap left by the removed card)
+        .replace(/\s+(['’]s\b)/g, '$1')       // "Liquid 's" → "Liquid's"
+        .trim();
       if (text.length > 20) paragraphs.push(text);
     });
     res.json({ title, author, date, heroImg, paragraphs });

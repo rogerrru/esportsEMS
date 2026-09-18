@@ -66,11 +66,11 @@ document.querySelector('.navbar').innerHTML = `
         <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
       </svg>
     </button>
-    <div class="hamburger" id="hamburger">
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
       <span class="bar"></span>
       <span class="bar"></span>
       <span class="bar"></span>
-    </div>
+    </button>
   </div>
 `;
 

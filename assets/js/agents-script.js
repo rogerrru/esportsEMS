@@ -142,6 +142,7 @@ function skillBtn(n) {
 
     abilitiesTextHead.textContent = ability.displayName;
     abilitiesTextBody.textContent = ability.description;
+    document.querySelectorAll('.abilities-ico').forEach(b => b.classList.toggle('active', b.id === String(n)));
 
     const mediaEl   = document.getElementById('abilities-media');
     const agentVids = agentVideoMap[data.displayName];

@@ -1,14 +1,11 @@
-const newsContainer    = document.querySelector('.news-container');
+const newsContainer     = document.querySelector('.news-container');
 const loadMoreContainer = document.querySelector('.load-more-container');
 
-const FALLBACK_GRADIENTS = [
-  'linear-gradient(135deg, #0f1923 0%, #ff4655 100%)',
-  'linear-gradient(135deg, #12101a 0%, #7b2fff 100%)',
-  'linear-gradient(135deg, #0a1520 0%, #4cc9f0 100%)',
-  'linear-gradient(135deg, #0f1923 0%, #f9c74f 100%)',
-  'linear-gradient(135deg, #1a0a0a 0%, #ff8c42 100%)',
-  'linear-gradient(135deg, #0a180a 0%, #39b54a 100%)',
-];
+// Scraped text goes into innerHTML below, so escape it first.
+const ESC = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ESC[c]);
+
+const ARROW_SVG = `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 8h11M9 3.5 13.5 8 9 12.5"/></svg>`;
 
 // Keyword-based category detection
 const CATEGORIES = {
@@ -28,8 +25,22 @@ function detectCategory(title, desc) {
 let allNewsData  = [];
 let renderedItems= []; // { el, category }
 let startIndex   = 0;
-const ITEMS_PER_PAGE = 6;
+// First page = 1 featured story + 2 full rows of 3, so the grid ends flush.
+const FIRST_PAGE_SIZE = 7;
+const PAGE_SIZE       = 6;
 let activeFilter = 'all';
+
+// ── Loading / error message inside the grid ───────────────────────────────
+function setStatus(text) {
+  let el = newsContainer.querySelector('.news-status');
+  if (!text) { el?.remove(); return; }
+  if (!el) {
+    el = document.createElement('p');
+    el.className = 'news-status';
+    newsContainer.appendChild(el);
+  }
+  el.textContent = text;
+}
 
 // ── Build the filter chip bar ─────────────────────────────────────────────
 function buildFilterBar() {
@@ -66,16 +77,26 @@ function applyFilter() {
 
 // ── Render news items ─────────────────────────────────────────────────────
 function fetchNews() {
+  if (startIndex === 0) setStatus('Loading latest news…');
+
   fetch(`${CONFIG.API_BASE_URL}/api/news`)
     .then(r => r.json())
     .then(fetched => {
       allNewsData = fetched;
       if (!fetched?.data?.segments) {
         console.error('Unexpected news shape:', fetched);
+        setStatus('Couldn’t load the news right now. Please try again in a moment.');
+        return;
+      }
+      setStatus(null);
+
+      if (!fetched.data.segments.length) {
+        setStatus('No news to show right now.');
         return;
       }
 
-      const segments = fetched.data.segments.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+      const pageSize = startIndex === 0 ? FIRST_PAGE_SIZE : PAGE_SIZE;
+      const segments = fetched.data.segments.slice(startIndex, startIndex + pageSize);
 
       segments.forEach((news, idx) => {
         const isFirst = startIndex === 0 && idx === 0;
@@ -84,15 +105,7 @@ function fetchNews() {
           ? news.url_path
           : `https://www.vlr.gg${news.url_path}`;
 
-        const hasImg   = news.img && !news.img.includes('error') && !news.img.includes('null');
-        const gradient = FALLBACK_GRADIENTS[(startIndex + idx) % FALLBACK_GRADIENTS.length];
         const category = detectCategory(news.title, news.description || '');
-
-        const imageContent = hasImg
-          ? `<img src="${news.img}" alt="${news.title}" loading="lazy">`
-          : `<div class="news-image-placeholder" style="background:${gradient};">
-               <span class="news-image-label">VLR.GG</span>
-             </div>`;
 
         const wrapper = document.createElement('div');
         wrapper.classList.add('indie-news-container');
@@ -100,17 +113,17 @@ function fetchNews() {
         wrapper.dataset.category = category;
 
         wrapper.innerHTML = `
-          <a class="news-item" href="${href}" target="_blank">
-            <div class="news-image">
-              ${imageContent}
-              <div class="news-image-overlay">
-                <span class="news-overlay-date">${news.date}</span>
-                <h2 class="news-overlay-title">${news.title}</h2>
-              </div>
+          <a class="news-item" href="${esc(href)}" target="_blank" rel="noopener">
+            <div class="news-top">
+              ${isFirst ? '<span class="news-badge">Latest</span>' : ''}
+              <span class="news-tag">${esc(category)}</span>
+              <span class="news-date">${esc(news.date)}</span>
             </div>
-            <div class="news-details">
-              <div class="news-content"><span>${news.description || ''}</span></div>
-              <div class="read-more"><h3>READ MORE</h3></div>
+            <h2 class="news-title">${esc(news.title)}</h2>
+            ${news.description ? `<p class="news-desc">${esc(news.description)}</p>` : ''}
+            <div class="news-foot">
+              <span class="news-author">${news.author ? `By <b>${esc(news.author)}</b>` : ''}</span>
+              <span class="news-cta">${isFirst ? 'Read story' : 'Read'} ${ARROW_SVG}</span>
             </div>
           </a>`;
 
@@ -123,14 +136,17 @@ function fetchNews() {
         renderedItems.push({ el: wrapper, category });
       });
 
-      startIndex += ITEMS_PER_PAGE;
+      startIndex += pageSize;
 
       const btn = document.querySelector('.load-more-button');
       btn.style.display = startIndex < allNewsData.data.segments.length ? 'block' : 'none';
 
       applyFilter();
     })
-    .catch(err => console.error('News fetch error:', err));
+    .catch(err => {
+      console.error('News fetch error:', err);
+      if (!renderedItems.length) setStatus('Couldn’t load the news right now. Please try again in a moment.');
+    });
 }
 
 const loadMoreButton = document.createElement('button');
@@ -157,25 +173,31 @@ async function loadArticle(url) {
 
     loadingEl.hidden = true;
 
-    const heroHtml = data.heroImg
-      ? `<img src="${data.heroImg}" alt="" class="article-hero-img" loading="lazy">`
+    const heroHtml = /^https?:\/\//.test(data.heroImg || '')
+      ? `<img src="${esc(data.heroImg)}" alt="" class="article-hero-img" loading="lazy">`
       : '';
 
     const contentHtml = (data.paragraphs || []).length
-      ? data.paragraphs.map(p => `<p class="article-detail-p">${p}</p>`).join('')
+      ? data.paragraphs.map(p => `<p class="article-detail-p">${esc(p)}</p>`).join('')
       : `<p class="article-no-content">Full content unavailable inline.
-           <a href="${url}" target="_blank">Read on VLR.gg ↗</a></p>`;
+           <a href="${esc(url)}" target="_blank" rel="noopener">Read on VLR.gg ↗</a></p>`;
+
+    const metaHtml = data.author || data.date
+      ? `<div class="article-detail-meta">
+           ${data.author ? `<span class="article-detail-author">${esc(data.author)}</span>` : ''}
+           ${data.date   ? `<span class="article-detail-date">${esc(data.date)}</span>`     : ''}
+         </div>`
+      : '';
 
     bodyEl.innerHTML = `
       ${heroHtml}
-      <h1 class="article-detail-title">${data.title || 'Article'}</h1>
-      ${data.author ? `<p class="article-detail-author">${data.author}</p>` : ''}
-      ${data.date   ? `<p class="article-detail-date">${data.date}</p>`   : ''}
+      <h1 class="article-detail-title">${esc(data.title || 'Article')}</h1>
+      ${metaHtml}
       <div class="article-detail-body">${contentHtml}</div>`;
   } catch {
     loadingEl.hidden = true;
     bodyEl.innerHTML = `<p class="article-error">Could not load article.
-      <a href="${url}" target="_blank">Open on VLR.gg ↗</a></p>`;
+      <a href="${esc(url)}" target="_blank" rel="noopener">Open on VLR.gg ↗</a></p>`;
   }
 }
 
@@ -204,9 +226,3 @@ function handleRoute() {
 document.getElementById('article-back-btn').addEventListener('click', () => history.back());
 window.addEventListener('hashchange', handleRoute);
 window.addEventListener('load', () => { buildFilterBar(); fetchNews(); handleRoute(); });
-
-function changeBackgroundImage(color) {
-  document.body.style.backgroundColor = color;
-  document.body.style.backgroundImage = 'none';
-}
-changeBackgroundImage('#0f1519');

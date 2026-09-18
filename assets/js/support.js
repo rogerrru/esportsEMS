@@ -74,7 +74,7 @@ const names = [
          listItem.className = 'names';
          listItem.innerHTML = `
             <a class="${person[0].f_name}">
-                <img src="/assets/media/stud_pics/${person[0].l_name}.png" alt="">
+                <img src="../assets/media/stud_pics/${person[0].l_name}.png" alt="">
                 <h1>${person[0].f_name} ${person[0].l_name}</h1>
                 <p>${person[0].email}</p>
             </a>
